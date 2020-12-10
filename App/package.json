@@ -1,13 +1,12 @@
 {
-  "name": "mqtt-database-connection",
+  "name": "iot-aquarium-manager",
   "version": "1.0.0",
-  "description": "Conexão do banco de dados SQL Server com servidor mqtt",
+  "description": "Trabalho de IoT que consiste em gerenciar um aquário.",
   "main": "main.js",
   "dependencies": {
     "dotenv": "^8.2.0",
     "mqtt": "^4.2.6",
     "moment": "^2.29.1",
-    "momment": "^0.0.1",
     "tedious": "^9.2.1"
   },
   "devDependencies": {},
@@ -16,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrohrloura/mqtt-database-connection.git"
+    "url": "git+https://github.com/pedrohrloura/iot-aquarium-manager.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pedrohrloura/mqtt-database-connection/issues"
+    "url": "https://github.com/pedrohrloura/iot-aquarium-manager/issues"
   },
-  "homepage": "https://github.com/pedrohrloura/mqtt-database-connection#readme"
+  "homepage": "https://github.com/pedrohrloura/iot-aquarium-manager#readme"
 }
