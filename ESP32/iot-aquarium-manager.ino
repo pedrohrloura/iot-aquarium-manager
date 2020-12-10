@@ -3,11 +3,7 @@
 #include <PubSubClient.h>
 #include <WifiClient.h>
 #include <Servo.h>
-
 /* Declarando os pinos */
-int red = 14;
-int yellow = 27;
-int blue = 26;
 int termistor = 4;
 Servo servo;
 
@@ -20,8 +16,9 @@ const char * brokerUser = "update me";
 const char * brokerPass = "update me";
 const char * broker = "update me";
 const char * tempTopic = "update me";
-const char * inTopic = "update me";
+const char * foodTopic= "update me";
 /**/
+
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -56,7 +53,7 @@ void reconnect()
     {
       Serial.print("\nConnected to");
       Serial.println(broker);
-      client.subscribe(inTopic);
+      client.subscribe(foodTopic);
     }
     else
     {
@@ -92,48 +89,18 @@ void darAlimento()
   }
 }
 
-float temperatura()
+int temperatura()
 {
-  float temperature = analogRead(termistor); //VARIÁVEL DO TIPO INTEIRO QUE RECEBE O VALOR DE TEMPERATURA CALCULADO PELA BIBLIOTECA
+  int temperature = analogRead(termistor); //VARIÁVEL DO TIPO INTEIRO QUE RECEBE O VALOR DE TEMPERATURA CALCULADO PELA BIBLIOTECA
   temperature /= 100;
   return temperature;
 }
 
-void ledOn(int led)
-{
-  digitalWrite(led, 1);
-}
-void ledOff(int led)
-{
-  digitalWrite(led, 0);
-}
 void command()
 {
-  switch (comando)
+  if(comando == '0' || comando == '1'|| comando == '2'|| comando == '3'|| comando == '4')
   {
-  case '0':
-    ledOn(red);
-    break;
-  case '1':
-    ledOff(red);
-    break;
-  case '2':
-    ledOn(yellow);
-    break;
-  case '3':
-    ledOff(yellow);
-    break;
-  case '4':
-    ledOn(blue);
-    break;
-  case '5':
-    ledOff(blue);
-    break;
-  case '6':
     darAlimento();
-    break;
-  default:
-    break;
   }
   comando = '-';
 }
@@ -144,9 +111,6 @@ void setup()
   client.setServer(broker, 1883); //1883 porta
   client.setCallback(callback);
 
-  pinMode(red, OUTPUT);
-  pinMode(yellow, OUTPUT);
-  pinMode(blue, OUTPUT);
   servo.attach(25); //Pino do servo
 }
 
@@ -157,14 +121,13 @@ void loop()
     reconnect();
   }
   client.loop();
-
   currentTime = millis();
 
   /* Publicando a cada 10 segundos */
-  if (currentTime - lastTime > 10000)
+  if (currentTime - lastTime > 30000)
   {
     Serial.print(temperatura());
-    snprintf(messages, 75, "%f", temperatura());
+    snprintf(messages, 75, " {\"temp\": \"%d\", \"codAquario\": 0}", temperatura());
     client.publish(tempTopic, messages);
     lastTime = millis();
   }

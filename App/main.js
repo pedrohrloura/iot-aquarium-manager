@@ -76,7 +76,7 @@ client.on('message', function (topic, message, packet) {
         console.log("Temperature: " + temp + "°C  Aquarium: " + codAquario);
         insertTemp(temp, codAquario)
     } else if (topic == foodTopic) {
-        let codAquario = data.codAquario;
+        let codAquario = Number(message)
         console.log(`Feeding aquarium ${codAquario}`)
         updateLastFood(codAquario);
     }
