@@ -1,3 +1,4 @@
 App/node_modules
 .vscode/
 App/.env
+App/BD/database.db
