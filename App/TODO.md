@@ -3,7 +3,7 @@
 		- [x] Manualmente
 		- [x] Alimento Periodicamente
 			- [x] Implementar  CronJs para Agenda de Alimentação
-			- [ ] A cada 1 hora executas as seguintes queries(está 1 min para testes)
+			- [x] A cada 1 hora executas as seguintes queries(está 1 min para testes)
 				- [x] Verificar se existe algum aquário que para ser alimentado
 				- [x] Verificar o melhor jeito de criar novas tasks
 					- [x] Criar um método que atualiza no BD mais de um aquário por vez

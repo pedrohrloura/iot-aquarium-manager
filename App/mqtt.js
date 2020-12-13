@@ -54,7 +54,7 @@ exports.mqttClient = {
         database.search("SELECT COD_AQUARIO, PERIODO FROM AQUARIO").then(async (aquarios) => {
             if (this.mqttClient.client.connected) {
                 console.log("Creating Schedules");
-                cron.schedule("* * * * *", _ => {
+                cron.schedule("* 1 * * *", _ => {
                     const minute = new Date().getMinutes();
                     aquarios.forEach(aquario => {
                         if (minute % aquario.PERIODO === 0 && (minute > 1 || minute === aquario.PERIODO)) {
